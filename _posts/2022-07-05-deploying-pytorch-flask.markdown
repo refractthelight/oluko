@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Deploying PyTorch with Flask"
-date:   2022-07-05 21:11:12 -0700
+date:   2022-07-05 21:00:00 -0700
 categories: pytorch flask ml imagenet
 ---
 I recently came across this [PyTorch tutorial][pytorch-flask-article] and was pleasantly surprised with how easy it was to expose an [DenseNet-121 model][densenet-papers-code] through a REST API. I decided to extend that tutorial and create a web UI as well.
