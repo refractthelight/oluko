@@ -14,7 +14,7 @@ I used the following libraries:
 * [jhlywa/chess.js][jhlywa]: Client-side game state management
 * [notnil/chess][notnil]: Server-side game state management
 
-The folder structure currently looked like this:
+The folder structure looks like this:
 
 ```sh
 ggchess/
