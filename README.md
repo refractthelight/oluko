@@ -1,7 +1,7 @@
 # oluko.co
 Olu's Blog
 
-### Run Local
+### Run Locally
 ```sh
 bundle exec jekyll serve
 ```
