@@ -15,3 +15,8 @@ Truths I strive to live (and hope to die) by.
 7. Always have a plan or you will be subject to another's.
 8. Labor diligently.
 9. Know well the condition of your flock.
+
+## Have a Plan
+
+> You must have a map, no matter how rough.
+–J. R. R. Tolkien

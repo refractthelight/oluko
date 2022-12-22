@@ -6,8 +6,6 @@ categories: chess algorithms go ggchess ui javascript
 --- 
 This week, I built a simple chess player and web UI to visualize the game state. Eventually, I will implement a multiple players based on different game playing algorithms (Minimax, Alpha-beta pruning, Monte-carlo tree search, etc.). 
 
-![Chessboard showing random play between both sides](https://storage.googleapis.com/oluko-blog/ggchess-random-play.gif){:style="display:block; margin-left:auto; margin-right:auto"}
-
 ## Setup
 I used the following libraries:
 * [chessboardjs][chessboardjs]: Client-side chessboard visualization
