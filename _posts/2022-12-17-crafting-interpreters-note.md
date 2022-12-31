@@ -184,7 +184,7 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
     * Networking
     * Reading input from user
 
-#### Ch. 3 Challenge Questions
+#### Ch. 4 Challenge Questions
 1. Sample Lox program. Edge case behaviors. Does it behave as expected?
   * Usage: `./jlox ch3.lox`
   * Edge cases:
@@ -211,3 +211,43 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
   * Math e.g. min, max, log
   * Timezones
   * Standard input and output
+
+### Design Note: Expressions and Statements
+
+* Not all languages have statements usually functional languages e.g. most Lisps, Haskell
+* Declarations and control flow constructs are expressions
+* Easy:
+  * `if` evaluates to the result of the chosen branch
+  * variable declaration evaluates to the value of the variable
+  * block evaluates to the last expresion in the sequence
+* Trickier
+  * What should a loop evaluate to?
+    * In CoffeeScript, `while` evaluates to an array with each element the body evaluated to
+* *Implicit returns* Functions return whatever the body evaluates to without need for explicit `return`. Common among languages that don't use.
+  * Languages that *do* have statements allow a *=>* to specify this implicit return behavior,
+
+## Ch 4. Scanning
+
+* *REPL*: An interactive prompt. Read-Eval-Print Loop. From Lisp.
+* It is good engineering practice to separate code that generates erros from code that reports the error
+  * Examples: on stderr, error window, logged to a file. All these should be handled in one place
+  * Errors will be generated in multiple locations and they should not be the ones to report the errors
+  * An `ErrorReporter` interface passed to the scanner, parser might be the best option
+* *Lexeme*: Smallest sequence of characters that mean something in the language
+  * e.g. `var` `language` `=` `"lox"` `;`
+* *Token*: Gotten from combining a lexeme with other date
+  * *Token type*: What kind of lexeme is represented e.g. left parenthesis, semicolon, string etc.
+* *Location information*: Sophisticated error handling implementations should include the column, length, and line the error occured.
+  * Some implementations store location with 2 numbers:
+    * Offset from beginning of source file
+    * Length of lexeme
+  * Convert offest to line:
+    * Count the number of preceding newlines
+    * Slow but only calculated when needing to display line and column info
+    * Since most tokens are not shown in an any error message, it's worth avoiding this computation
+
+### Regular Languages and Expressisions
+* Scanner loops and progressively finds a lexeme and emits a token
+  * A *regex* may be used to match the lexeme
+* *Lexical grammar*: Rules that describe how a language groups characters into lexemes
+* *Regular languages*: Rules that are simple enough where grammar can be defined with lexical grammar (?)
