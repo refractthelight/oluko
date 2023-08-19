@@ -268,3 +268,4 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
 1. Python and Haskell grammar are not *regular* It means the lexemes cannot be lexed with regular expressions. Python and Haskell are indentation-sensitive. Lexers need to capture the change in indent/unindent and it's not possible with regular expressions [Source](https://www.reddit.com/r/compsci/comments/kkzn3r/the_lexical_grammars_of_python_and_haskell_are/).
 
 ## Ch. 5: Representing Code
+
