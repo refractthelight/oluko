@@ -202,6 +202,8 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
      * No
    * Do we have access to pointers? 
      * No 
+   * Are multi-line strings allowed?
+   * Are escaped characters supported?
 
 3. Additional critical features apart from standard library
   * Formatting text
@@ -229,14 +231,15 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
 ## Ch 4. Scanning
 
 * *REPL*: An interactive prompt. Read-Eval-Print Loop. From Lisp.
-* It is good engineering practice to separate code that generates erros from code that reports the error
+* It is good engineering practice to separate code that generates errors from code that reports the error
   * Examples: on stderr, error window, logged to a file. All these should be handled in one place
   * Errors will be generated in multiple locations and they should not be the ones to report the errors
   * An `ErrorReporter` interface passed to the scanner, parser might be the best option
 * *Lexeme*: Smallest sequence of characters that mean something in the language
   * e.g. `var` `language` `=` `"lox"` `;`
-* *Token*: Gotten from combining a lexeme with other date
+* *Token*: Lexeme + Metadata:
   * *Token type*: What kind of lexeme is represented e.g. left parenthesis, semicolon, string etc.
+* *Literal*: Numbers or strings
 * *Location information*: Sophisticated error handling implementations should include the column, length, and line the error occured.
   * Some implementations store location with 2 numbers:
     * Offset from beginning of source file
@@ -251,3 +254,17 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
   * A *regex* may be used to match the lexeme
 * *Lexical grammar*: Rules that describe how a language groups characters into lexemes
 * *Regular languages*: Rules that are simple enough where grammar can be defined with lexical grammar (?)
+
+#### Recognizing Lexemes
+* It's good UX to report as many errors as possible
+* *Lookahead*: Used in the scanner to get the next character without advancing the current scanning pointer. The smaller the lookahead, the faster the scanner.
+* *Maximal munch*: When two rules can match a chunk of code, the one that matches more should be chosen. If we can match `orchid` or `or`, we go with `orchid`. e.g. in C, `---a;` is scanned as `-- -a` instead of `- --a`.
+* *Reserved word*: identifier reserved by the language.
+
+#### Design Note
+* When designing a new language, avoid explicit statement terminators e.g. `;`
+
+#### Ch. 4 Challenge Questions
+1. Python and Haskell grammar are not *regular* It means the lexemes cannot be lexed with regular expressions. Python and Haskell are indentation-sensitive. Lexers need to capture the change in indent/unindent and it's not possible with regular expressions [Source](https://www.reddit.com/r/compsci/comments/kkzn3r/the_lexical_grammars_of_python_and_haskell_are/).
+
+## Ch. 5: Representing Code
