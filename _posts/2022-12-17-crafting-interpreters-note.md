@@ -269,3 +269,42 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
 
 ## Ch. 5: Representing Code
 
+* We want a code representation that's:
+  * Simple for the parser to create
+  * Easy for the interpreter to run
+
+* Idea: **Tree** of operations that we act on using *post-order traversal.*
+
+## Context-Free Grammers (CFG)
+* Grammer for lexemes (*regular languages*) is not expressive enough for expressions (e.g. arbitrary nesting)
+
+| Terminology | Lexical grammer | Syntactic grammer |
+| ----------- | --------------- | ----------------- |
+| Alphabet    | Characters      | Tokens            |
+| Words       | Lexeme/Tokens   | Expressions       |
+| Implementer | Parser          | Interpreter       |
+
+* Key idea: Define *rules* to generate infinite valid strings
+  * *Derivations:* Strings *dervied* from the rules
+  * *Productions:* Rules used to *produce* the strings
+  * *Head:* Name of the CFG
+  * *Body:* Describes what the CFG creates 
+  * *Terminal:* A 'letter' in the grammar. Does not lead to new strings.
+  * *Nonterminal:* Named reference to another rule.
+  * *Backus-Naur Form:* Way to specify grammar
+    * breakfast -> protein `with` breakfast `on the side`;
+    * protein -> crispiness crispy `sausage`
+    * crispiness -> `really`
+    * crispiness -> `really` crispy
+    * protein -> `eggs`
+* Recursions where there are *productions* on either side of a *terminal* are not regular
+  * Why? We need to track the number of terms to match either side which is not possible with regular grammars
+* Improving CFG notation:
+  * breakfast -> protein (`with` breakfast `on the side`)?
+               | bread ;
+  * protein   -> `really`+ `crispy` `bacon`
+               | (`poached` | `fried`) `eggs` ;
+  * bread     -> `toast` | `buscuits` ;
+* CFGs help crystallize the informal syntax
+
+## Grammar for Lox Expressions
