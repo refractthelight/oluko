@@ -275,7 +275,7 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
 
 * Idea: **Tree** of operations that we act on using *post-order traversal.*
 
-## Context-Free Grammers (CFG)
+### Context-Free Grammers (CFG)
 * Grammer for lexemes (*regular languages*) is not expressive enough for expressions (e.g. arbitrary nesting)
 
 | Terminology | Lexical grammer | Syntactic grammer |
@@ -302,9 +302,34 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
 * Improving CFG notation:
   * breakfast -> protein (`with` breakfast `on the side`)?
                | bread ;
-  * protein   -> `really`+ `crispy` `bacon`
+  * protein   -> `really`+ `crispy` `bacPon`
                | (`poached` | `fried`) `eggs` ;
   * bread     -> `toast` | `buscuits` ;
 * CFGs help crystallize the informal syntax
 
-## Grammar for Lox Expressions
+### Grammar for Lox Expressions
+
+* The syntactic grammar, different from the lexical grammar, is much larger. 
+* Beginning grammar is (currently ambiguous):
+  * ```sh
+    expression -> literal | unary | binary | grouping;
+    literal -> NUMBER | STRING | "true" | "false" | "nil";
+    grouping -> "(" expression ")"
+    unary -> ("!" | "-") expression;
+    binary -> expression operator expression;
+    operator -> "==" | "!=" | "<" | "<=" | ">" |
+                ">=" | "+"  | "-" | "*"  | "/";
+    ```
+
+### Syntax Trees
+* We will use a data structure, *syntax tree* that captures our syntax
+  * It's going to be a *tree* since since some *heads* e.g. `unary` refer back to an `expression`. 
+  * *Abstract Syntax Tree (AST)* skips (elides) productions that are not needed
+  * In a *Parse Tree*, every production becomes a node in the tree
+ 
+### Disoriented objects
+* Should the `Expression` class include implementation logic?
+  * Probably not, as they're owned by other classes
+  * These classes are a way to communicate between the *parser* and *interpreter*
+
+## Working with Trees
