@@ -333,3 +333,24 @@ Personal notes for new terms and concepts I come across in the [Crafting Interpr
   * These classes are a way to communicate between the *parser* and *interpreter*
 
 ## Working with Trees
+* Having `if-else` blocks for handling different types of `expressions`s is suboptimal
+  * `Expression`s later in the blocks will run slower
+  * We could use attach an `interpret()` method on each `Expression` (*Interpreter pattern*)
+    * This doesn't scale well as the class is used in multiple domains
+    * Object-oriented and functional languages have pros and cons in ease of ('expression problem'):
+      1. Adding a new class e.g. `BinaryExpr`
+      2. Adding a new method e.g. `interpret()`
+ * *The Expression Problem:* How do you add new classes and operations on the classes.
+   * Object-Oriented languages make it easier to add new classes () 
+   * Functional languages make it easy to add new functions (pattern matching)
+   * Neither style makes it easy to add both classes and functions
+ * *Visitor Pattern:* Approximate functional style in OOP by adding a layer of indirection.
+   * Consider:
+     * `Pastry` with subclasses `Beignet, Cruller`
+     * Subclasses define `accept(PastryVisitor visitor)`
+     * `PastryVisitor` contains `visitBeignet, visitCruller` etc.
+     * Subclasses implement their specific visitor
+
+## Ch. 6: Parsing Expressions
+
+* 

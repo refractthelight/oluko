@@ -13,7 +13,7 @@ ffmpeg \
  -i watermark.png \
  -filter_complex "
    [1:v] format=argb,geq=r='r(X,Y)':a='0.3*alpha(X,Y)' [watermark]; 
-   [0:v][watermark] overlay=10:10
+   [0:v][watermark] overlay=10:H-h-10
   " \
  output_video.mp4
 ```
@@ -21,6 +21,6 @@ ffmpeg \
 Explanation (with help from ChatGPT):
 * `[1:v]` applies the subsequent format to the **video (v)** channel of the `watermark.png` (index 1) 
 * `[watermark]` at the end is a label for the output
-* `[0:v][watermark]` overlays `[watermark]` unto the **video** channel of the `input_video` (index 0)
+* `[0:v][watermark] overlay=10:10` overlays `[watermark]` unto the **video** channel of the `input_video` (index 0) at the bottom right with an offset of 10px, 10px along width, height respectively
 * `format=argb` allows supporting images with no alpha transparency
 * `geq=r='r(X,Y)':a='0.3*alpha(X,Y)` *geq (general equation)* applies transparency of `0.3` for each pixel
